@@ -1,0 +1,22 @@
+{
+  "name": "Kailash Kumar — Portfolio",
+  "short_name": "Kailash",
+  "description": "Portfolio of Kailash Kumar, a Computer Science student focused on full-stack web development and problem solving.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#FCF0DA",
+  "theme_color": "#F2C46A",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}

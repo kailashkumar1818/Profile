@@ -1,0 +1,400 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Design tokens — dark is the default; `.dark` lives on <html>.
+   Values are RGB channels so Tailwind's `/opacity` modifiers keep working.
+   ───────────────────────────────────────────────────────────────────────────── */
+@layer base {
+  :root {
+    /* ── Light mode — warm cream palette ───────────────────────────────────── */
+    /* #FCF0DA canvas · #AEAC78 olive · #F2C46A gold · #4C4541 brown          */
+    --canvas: 252 240 218;      /* #FCF0DA — warm cream */
+    --surface: 255 250 240;     /* off-white card surface */
+    --elevated: 253 246 228;    /* subtle warm lift */
+    --ink: 76 69 65;            /* #4C4541 — dark warm brown */
+    --muted: 120 110 92;        /* medium warm brown */
+    --faint: 174 172 120;       /* #AEAC78 — olive/sage */
+    --line: 228 210 178;        /* warm beige border */
+    --accent: 242 196 106;      /* #F2C46A — golden amber */
+    --accent-soft: 253 242 210; /* pale gold tint */
+    --on-accent: 76 69 65;      /* #4C4541 on gold — readable */
+  }
+
+  .dark {
+    /* ── Dark mode — deep warm browns ──────────────────────────────────────── */
+    --canvas: 36 32 28;         /* very dark warm brown */
+    --surface: 50 44 38;        /* dark card surface */
+    --elevated: 62 55 46;       /* slightly lighter dark */
+    --ink: 252 240 218;         /* #FCF0DA — cream text */
+    --muted: 200 188 162;       /* warm light muted */
+    --faint: 155 150 108;       /* muted olive */
+    --line: 88 78 66;           /* dark warm border */
+    --accent: 242 196 106;      /* #F2C46A — gold stays vibrant */
+    --accent-soft: 62 50 22;    /* deep gold tint */
+    --on-accent: 76 69 65;      /* dark brown on gold */
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply min-h-screen font-sans text-ink antialiased;
+    background-color: rgb(var(--canvas));
+    overflow-x: hidden;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    body {
+      background: linear-gradient(
+        135deg,
+        rgb(var(--canvas)) 0%,
+        rgb(var(--elevated)) 45%,
+        rgb(var(--canvas)) 100%
+      );
+      background-size: 400% 400%;
+      animation: gradient-drift 22s ease infinite;
+    }
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background-color: rgb(var(--accent) / 0.26);
+    color: rgb(var(--ink));
+  }
+
+  :where(a, button, input, textarea, select, summary):focus-visible {
+    outline: 2px solid rgb(var(--accent));
+    outline-offset: 3px;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(var(--faint) / 0.42) transparent;
+  }
+
+  *::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: rgb(var(--faint) / 0.35);
+    border: 3px solid transparent;
+    border-radius: 9999px;
+    background-clip: content-box;
+  }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus {
+    -webkit-text-fill-color: rgb(var(--ink));
+    -webkit-box-shadow: 0 0 0 1000px rgb(var(--elevated)) inset;
+    transition: background-color 9999s ease-in-out 0s;
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-8 lg:px-10;
+  }
+
+  .section-shell {
+    @apply relative py-20 sm:py-24 lg:py-28;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2.5 font-mono text-[0.68rem] font-medium uppercase tracking-[0.22em] text-accent;
+  }
+
+  .eyebrow::before {
+    content: "";
+    width: 1.75rem;
+    height: 1px;
+    background: rgb(var(--accent) / 0.55);
+  }
+
+  .surface-card {
+    @apply rounded-3xl border border-line bg-surface shadow-soft;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition-all duration-300 ease-smooth;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-accent px-5 py-3 text-sm font-semibold text-on-accent shadow-soft transition-all duration-300 ease-smooth hover:-translate-y-0.5 hover:shadow-glow active:translate-y-0;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-line bg-surface px-5 py-3 text-sm font-semibold text-ink shadow-soft transition-all duration-300 ease-smooth hover:-translate-y-0.5 hover:border-accent/40 hover:bg-elevated active:translate-y-0;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-4 py-3 text-sm font-semibold text-muted transition-all duration-300 ease-smooth hover:-translate-y-0.5 hover:bg-accent-soft hover:text-accent active:translate-y-0;
+  }
+
+  .icon-button {
+    @apply inline-flex h-10 w-10 items-center justify-center rounded-full border border-line bg-surface/70 text-muted transition-all duration-300 ease-smooth hover:-translate-y-0.5 hover:border-accent/35 hover:text-accent;
+  }
+
+  .tag {
+    @apply inline-flex items-center rounded-full border border-line bg-elevated/80 px-2.5 py-1 font-mono text-[0.67rem] font-medium tracking-wide text-muted;
+  }
+
+  .skill-chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-line/80 bg-elevated/65 px-2.5 py-1 text-xs font-medium text-ink;
+  }
+
+  .input-field {
+    @apply w-full rounded-2xl border border-line bg-elevated/55 px-4 py-3 text-sm text-ink placeholder:text-faint/80 transition-colors duration-200 hover:border-line/80 focus:border-accent/60 focus:bg-elevated focus:outline-none;
+  }
+
+  .social-dot {
+    @apply inline-flex h-10 w-10 items-center justify-center rounded-full border border-line bg-surface/60 text-muted transition-all duration-300 ease-smooth hover:-translate-y-0.5 hover:border-accent/40 hover:text-accent hover:shadow-soft;
+  }
+}
+
+@layer utilities {
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, rgb(var(--line) / 0.58) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(var(--line) / 0.58) 1px, transparent 1px);
+    background-size: 62px 62px;
+  }
+
+  .mask-radial {
+    -webkit-mask-image: radial-gradient(ellipse 72% 62% at 50% 36%, #000 15%, transparent 78%);
+    mask-image: radial-gradient(ellipse 72% 62% at 50% 36%, #000 15%, transparent 78%);
+  }
+
+  .mask-fade-b {
+    -webkit-mask-image: linear-gradient(to bottom, #000 25%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 25%, transparent 100%);
+  }
+
+  .art-grid {
+    background-image:
+      linear-gradient(to right, rgb(var(--ink) / 0.055) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(var(--ink) / 0.055) 1px, transparent 1px);
+    background-size: 30px 30px;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Living UI — organic motion
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* Organic blob that continuously morphs its silhouette */
+@keyframes blob-morph {
+  0%, 100% {
+    border-radius: 58% 42% 34% 66% / 57% 32% 68% 43%;
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    border-radius: 40% 60% 55% 45% / 62% 40% 60% 38%;
+    transform: translate(10px, -16px) scale(1.05);
+  }
+  50% {
+    border-radius: 70% 30% 48% 52% / 40% 68% 32% 60%;
+    transform: translate(-6px, -8px) scale(0.97);
+  }
+  75% {
+    border-radius: 35% 65% 62% 38% / 55% 42% 58% 45%;
+    transform: translate(-12px, 10px) scale(1.03);
+  }
+}
+
+/* Tiny particles that drift upward and fade out */
+@keyframes particle-rise {
+  0%   { transform: translateY(0) scale(1); opacity: 0.75; }
+  40%  { opacity: 0.35; }
+  100% { transform: translateY(-240px) translateX(12px) scale(0.08); opacity: 0; }
+}
+
+/* Background gradient that slowly drifts */
+@keyframes gradient-drift {
+  0%, 100% { background-position: 0% 50%; }
+  50%       { background-position: 100% 50%; }
+}
+
+/* Shimmer sweep across text */
+@keyframes shimmer-sweep {
+  0%   { background-position: -220% center; }
+  100% { background-position: 220% center; }
+}
+
+/* Breathing scale + expanding ring */
+@keyframes breathe-ring {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgb(var(--accent) / 0.45);
+  }
+  50% {
+    transform: scale(1.12);
+    box-shadow: 0 0 0 12px rgb(var(--accent) / 0);
+  }
+}
+
+/* Cursor-glow ambient pulse */
+@keyframes glow-breathe {
+  0%, 100% { opacity: 0.75; }
+  50%       { opacity: 0.45; }
+}
+
+/* ── Utility classes — all gated by prefers-reduced-motion ── */
+@media (prefers-reduced-motion: no-preference) {
+  .animate-blob {
+    animation: blob-morph ease-in-out infinite;
+  }
+
+  .animate-particle {
+    animation: particle-rise ease-out infinite;
+    opacity: 0;
+  }
+
+  .animate-breathe {
+    animation: breathe-ring 2.8s ease-in-out infinite;
+  }
+
+  .animate-glow-breathe {
+    animation: glow-breathe 4s ease-in-out infinite;
+  }
+
+  /* Hero name: shimmer from brown → gold → olive → gold → brown */
+  .shimmer-name {
+    background: linear-gradient(
+      90deg,
+      rgb(var(--ink))    0%,
+      rgb(var(--accent)) 30%,
+      rgb(var(--faint))  52%,
+      rgb(var(--accent)) 72%,
+      rgb(var(--ink))    100%
+    );
+    background-size: 220% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shimmer-sweep 4.5s linear infinite;
+  }
+
+  /* Eyebrow accent line with a colour-drift */
+  .eyebrow::before {
+    background: linear-gradient(
+      90deg,
+      rgb(var(--accent)) 0%,
+      rgb(var(--faint))  50%,
+      rgb(var(--accent)) 100%
+    );
+    background-size: 200% 100%;
+    animation: gradient-drift 5s ease infinite;
+  }
+}
+
+/* Fallback: shimmer-name just shows accent colour in reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .shimmer-name { color: rgb(var(--accent)); }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Motion (scroll-reveal, typing, entrance)
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* Scroll-reveal: hidden only until IntersectionObserver marks it visible. */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Entrance animation for hero content. */
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes caret-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-rise {
+    opacity: 0;
+    animation: hero-rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  .typed-caret {
+    animation: caret-blink 1.05s steps(1) infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    will-change: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

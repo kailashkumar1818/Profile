@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Primary SEO -->
+    <title>Kailash Kumar — Full-Stack Developer & CS Student</title>
+    <meta
+      name="description"
+      content="Portfolio of Kailash Kumar, a Computer Science student focused on full-stack web development and problem solving. Explore projects, skills, experience, and education."
+    />
+    <meta name="author" content="Kailash Kumar" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#FCF0DA" />
+    <link rel="icon" type="image/svg+xml" href="%BASE_URL%favicon.svg" />
+    <link rel="apple-touch-icon" href="%BASE_URL%apple-touch-icon.png" />
+    <link rel="manifest" href="%BASE_URL%site.webmanifest" />
+
+    <!-- Social sharing / Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Kailash Kumar" />
+    <meta
+      property="og:title"
+      content="Kailash Kumar — Full-Stack Developer & CS Student"
+    />
+    <meta
+      property="og:description"
+      content="Computer Science student focused on full-stack web development and problem solving. Building real-world projects and strengthening fundamentals in data structures and backend systems."
+    />
+    <meta property="og:image" content="%BASE_URL%og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Kailash Kumar — Full-Stack Developer and Computer Science student" />
+    <meta property="og:locale" content="en_IN" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Kailash Kumar — Full-Stack Developer & CS Student"
+    />
+    <meta
+      name="twitter:description"
+      content="Computer Science student focused on full-stack web development and problem solving."
+    />
+    <meta name="twitter:image" content="%BASE_URL%og-image.png" />
+
+    <!-- Fonts: Inter (body) + Space Grotesk (display) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Kailash Kumar",
+        "description": "Computer Science student focused on full-stack web development and problem solving.",
+        "alumniOf": {
+          "@type": "CollegeOrUniversity",
+          "name": "SRM University AP"
+        },
+        "knowsAbout": [
+          "Web Development",
+          "Full-Stack Development",
+          "Data Structures",
+          "C++",
+          "JavaScript"
+        ]
+      }
+    </script>
+
+    <!-- Set the saved theme before first paint to avoid a flash of the wrong theme. -->
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem("kailash-theme");
+          var isDark = stored ? stored === "dark" : false;
+          document.documentElement.classList.toggle("dark", isDark);
+          document.documentElement.style.colorScheme = isDark ? "dark" : "light";
+          var meta = document.querySelector('meta[name="theme-color"]');
+          if (meta) meta.setAttribute("content", isDark ? "#24201c" : "#FCF0DA");
+        } catch (_) {
+          // light stays as default if localStorage unavailable
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
