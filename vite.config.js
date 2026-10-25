@@ -1,9 +1,9 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
-// `base: "./"` keeps asset URLs relative, so the same build works on both
-// Vercel (domain root) and GitHub Pages (repository sub-path).
+// Base path is root '/' for Vercel and modern hostings.
+// Set BASE_URL environment variable if deploying to a subfolder (e.g. GitHub Pages).
 export default defineConfig({
   plugins: [react()],
-  base: "./",
+  base: process.env.BASE_URL || "/",
 });
